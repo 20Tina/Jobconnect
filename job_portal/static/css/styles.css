@@ -1,0 +1,22 @@
+.navbar{
+    background-color: rgba(241, 72, 72, 0.982);
+    
+}
+.navbar a{
+    color: aliceblue;
+    font-size: larger;
+}
+.summary-box{
+    background-color: #fafafa;
+    padding: 20px;
+    border: 1px solid #f7d13a;
+    border-radius: 5px;
+}
+
+form.container-fluid {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    max-width: 600px;
+}

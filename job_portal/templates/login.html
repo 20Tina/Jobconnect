@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+ {% block title %}
+   job-portal login
+ {% endblock title %}
+ 
+ 
+ 
+ {% block content1 %}
+     <div class="container-fluid">
+     <div class="row">
+      <div class="class  w-50 mt-3 bg-body-tertiary shadow mx-auto p-3 rounded-3">
+  
+    {% if error %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{error}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    
+      <img src="{% static 'images\job-search-high-resolution-logo (2).png' %}" alt="" width="80" height="70" class="justify-content-center">
+    
+    
+    <h3 class="text-center">Login to job-portal</h3>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" name="uname" class="form-control" placeholder="Enter registered email"
+                        id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" name="pass1" class="form-control" placeholder="Enter your password"
+                        id="exampleInputPassword1" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Signin</button>
+                
+                <p class="mt-2">
+                    <a href="{% url 'registration' %}">Create a new account?</a><br>
+                    {% comment %} <a href="">Forgot password?</a> {% endcomment %}
+                </p>
+            </form>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
+ {% endblock content1 %}
+   

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Dashboard
+{% endblock title %}
+
+{% block content1 %}
+   <div class="container-fluid ">
+    <h1 class="text-center mb-4" style="color:black;">Welcome to Your Dashboard</h1>
+    <div class="row">
+    <div class="col-lg-3">
+      <img src="{% static 'images/job13.jpg' %}" alt="" width="600px" height="600px">
+    </div>
+   <div class="col-lg-9">
+   
+    <div class="row justify-content-center p-3">
+      <div class="col-md-8">
+        <a href="{% url 'save_application' %}" style="text-decoration: none; color:black;">
+          <div class="card p-4 ">
+            <h2 class="text-center mb-4 rounded-5 " style="background-color: rgb(238, 145, 79);">Your Profile</h2> 
+           {% if user_profile_instance %}
+           <div class="profile-info text-center " style="font-family:'Courier New', Courier, monospace;">
+              <p><strong><i class="bi bi-person-fill"></i>  :   {{user_profile_instance.user.get_full_name}}</p></strong>
+               <p><strong><i class="bi bi-envelope-fill"></i>  :  {{user_profile_instance.email}}</p></strong>
+              <p><strong><i class="bi bi-phone-fill"></i>  :  {{user_profile_instance.phone_number}}</p></strong> 
+            
+           </div>
+          
+           {% endif %}
+           
+        </a>
+        
+        </div>
+      </div>
+      
+    <div class="row justify-content-center mt-5 ">
+      <div class="col-md-8">
+        <div class="card  p-4">
+         <a href="{% url 'job_applied' %}" style="text-decoration: none; color:black;">
+          <h2 class="text-center mb-4 rounded-5" style="background-color: rgb(238, 145, 79);">Your Applications</h2>
+          
+          <div class="job-applications text-center " style="font-family:'Courier New', Courier, monospace;">
+           
+            {% for applied in applied_jobs %}
+          <p><strong>{{forloop.counter}}{{applied.job.title}}</strong></p>
+          {% endfor %}
+          
+           
+          </div>
+         </a>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-5">
+      <div class="col-md-8">
+        <div class="card p-4 " >
+         <a href="{% url 'save_application' %}" style="text-decoration: none; color:black;">
+          <h2 class="text-center mb-4 rounded-5" style="background-color: rgb(238, 145, 79);">Saved Jobs</h2>
+         
+          <div class="saved-jobs text-center " style="font-family:'Courier New', Courier, monospace;">
+          {% for saved_job in saved_jobs %}
+             
+              <p><strong>{{forloop.counter}}.{{ saved_job.job.title }}</strong></p>
+          {% endfor %}
+            
+           
+          </div>
+        </div>
+         </a>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+  </div> 
+{% endblock content1 %}

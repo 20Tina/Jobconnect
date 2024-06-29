@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ job portal profile save-jobs
+{% endblock title %}
+{% block content1 %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4 bg-body-tertiary justify-content-bottom">
+      <h3>Your Profile</h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group-userprofile">
+          <label for="profile-picture">Profile Picture:</label>
+          <div class="custom-file">
+            {% if user_profile_instance.profile_picture %}
+              <img src="{{ user_profile_instance.profile_picture.url }}" class="rounded-circle {% if not user_profile_instance.profile_picture %} hidden {% endif %}" alt="Profile Picture" width="200" height="200">
+            {% else %}
+              <p>No profile picture uploaded.</p>
+            {% endif %}
+            <label for="profile-picture" class="custom-file-label"> <span><i class="bi bi-arrow-up-circle"></i></span> </label>
+            <input type="file" class="custom-file-input" id="profile-picture" name="profile_picture" accept="image/*">
+          </div>
+        </div>
+        <div class="form-group-userprofile">
+          <label for="name">Name:</label>
+        <input type="text" id="name" name="full_name" value="{{full_name}}" class="form-control" placeholder="Name" required>
+        </div>
+        <div class="form-group-userprofile">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="{{ user_profile_instance.email }}" class="form-control" placeholder="Email" required>
+        </div>
+        <div class="form-group-userprofile">
+          <label for="birthdate">Birthdate:</label>
+          <input type="date" id="birthdate" name="birthdate" value="{{ user_profile_instance.birthdate|date:'Y-m-d' }}" class="form-control" required>
+        </div>
+        <div class="form-group-userprofile">
+          <label for="bio">Bio:</label>
+          <textarea id="bio" name="bio" rows="5" class="form-control" required>{{ user_profile_instance.bio }}</textarea>
+        </div>
+        <div class="form-group-userprofile">
+          <label for="phone_number">Phone Number:</label>
+          <input type="tel" id="phone_number" value="{{ user_profile_instance.phone_number }}" name="phone_number" class="form-control" required>
+        </div>
+
+        <h2 class="text">Educational Information</h2> 
+    
+          <div class="form-group-userprofile">
+            <label for="ssc_percentage">SSC Percentage:</label>
+             <input type="text" id="ssc_percentage" name="ssc_percentage" value="{{ user_profile_instance.ssc_percentage }}" class="form-control" placeholder="Enter your SSC percentage">
+            </div>
+
+            <div class="form-group-userprofile">
+            <label for="hsc_percentage">HSC Percentage:</label>
+            <input type="text" id="hsc_percentage" name="hsc_percentage" value="{{ user_profile_instance.hsc_percentage }}" class="form-control" placeholder="Enter your HSC percentage">
+        </div>   
+                <div class="form-group-userprofile">
+                    <label for="degree">Degree:</label>
+                    <input type="text" id="degree" name="degree" class="form-control" value="{{ user_profile_instance.degree }}" required>
+                </div>
+                <div class="form-group-userprofile">
+                    <label for="institution">Institution:</label>
+                    <input type="text" id="institution" name="institution" class="form-control" value="{{ user_profile_instance.institution }}" required>
+                </div>
+                <div class="form-group-userprofile">
+                    <label for="graduation_year">Graduation Year:</label>
+                    <input type="number" id="graduation_year" name="graduation_year" class="form-control" value="{{ user_profile_instance.graduation_year }}" required>
+                </div>
+         
+       <h2 class="text">Skills and Expertise</h2> 
+  
+     <div class="form-group-userprofile">
+        <label for="skills">Skills:</label>
+        <textarea id="skills" name="skills"  class="form-control" placeholder="Enter your skills">{{ user_profile_instance.skills }}</textarea>
+    
+    </div>
+    <br>
+    <div class="form-group-userprofile">
+        <div class="custom-file">
+            <label for="resume">Resume:</label>
+            <label for="resume" class="custom-file-label"><span><i class="bi bi-arrow-up-circle"></i></span></label>
+            <input type="file" class="custom-file-input" id="resume" name="resume" accept=".pdf,.doc,.docx">
+            {% if user_profile_instance.resume %}
+        <p>Current Resume:<a href="{{ user_profile_instance.resume.url }}">{{ user_profile_instance.resume.name }}</a> <b class="bi bi-arrow-up-circle"></b> </p>
+          {% else %}
+        <p>No resume uploaded.</p>
+           {% endif %}
+        </div>
+        </div>
+
+        <div class="class text-center">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+
+
+      </form>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="class mt-2">
+       <h3 class="text-center">Saved Jobs</h3>
+        <div class="row">
+          {% for saved_job in saved_jobs %}
+          <div class="col-md-6 mb-3">
+            <div class="card" style="max-width:500px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{ saved_job.job.logo_image.url }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ saved_job.job.title }}</h5>
+                    <p class="card-text"><strong>Salary:</strong>{{ saved_job.job.salary }}</p>
+                    <p class="card-text"><strong>Company:</strong> {{ saved_job.job.company_name }}</p>
+                    <p class="card-text"><strong>Location:</strong> {{ saved_job.job.location }}</p>
+                    <p class="card-text"><strong>Job Type:</strong> {{ saved_job.job.job_type }}</p>
+                    <p class="card-text"><strong>Saved at:</strong> {{ saved_job.save_time }}</p>
+                    <a  href="{% url 'del_save_jobs' saved_job.id %}"><button class="btn btn-danger btn-sm">Delete</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+{% endblock content1 %}

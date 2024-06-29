@@ -1,0 +1,53 @@
+.job-card {
+    border: 1px solid #cb8e14; /* Set border color */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    margin-bottom:10px; /* Add margin between cards */
+    transition: box-shadow 0.3s ease; /* Add transition for box shadow */
+   
+    margin-left: 30px;
+}
+
+.job-card:hover {
+    box-shadow: 0 0 10px rgba(218, 202, 26, 0.951); /* Add box shadow on hover */
+}
+
+
+.job-card .card-body {
+    padding:30px; /* Add padding to card body */
+}
+
+.job-card .card-title {
+    font-size: 1.2rem; /* Increase font size for job title */
+    margin-bottom: 10px; /* Add margin below job title */
+}
+
+.job-card .card-text {
+    margin-bottom: 5px; /* Add margin below card text */
+}
+
+.job-card .btn-primary {
+    border-radius: 20px; /* Add border radius to primary button */
+}
+
+.job-type-filter-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: rgb(238, 170, 170);
+}
+
+
+.job-type-filter-form label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.job-type-filter-form select {
+    padding: 8px;
+    border: 1px solid #d93030;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+ job-portal signup
+{% endblock title %}
+ {% block content1 %}
+ <div class="container-fluid ">
+      <div class="row justify-content-center">
+    <div class="mt-5 rounded-3 shadow-lg p-3 bg-white w-50 ">
+            {% if error %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{error}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>    
+            {% endif %}
+            <img src="{% static 'images\job-search-high-resolution-logo (2).png' %}" alt="" width="80" height="70" >
+            <h3 style="text-align: center;">Registration form</h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                <h5 class="text-primary">Create a  new Account</h5>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="fname" placeholder="First name" aria-label="First name" required>
+                    </div>
+                    <div class="col">
+                        <label for="" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="lname" placeholder="Last name" aria-label="Last name" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email address" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="pass1" placeholder="Create password" id="exampleInputPassword1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="pass2" placeholder="Confirm password" id="exampleInputPassword2" required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">I agree to terms and conditions</label>
+                </div>
+                <button type="submit" class="btn btn-primary">SignUp</button>
+                <a href="{% url 'login' %}">Already have an account?</a>
+            </form>
+            
+        </div>
+      </div>
+    </div>
+
+ {% endblock content1 %}
+    

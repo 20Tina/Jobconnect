@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}
+  job portal
+{% endblock title %}
+{% block content1 %}
+
+
+
+  <nav class="navbar-search mt-2" >
+    <div class="row job-type-filter-form  rounded-pill bg-body-tertiary" style="width:80%;height:100px;margin-left:150px;text-align: center;">
+   
+    <form method="GET">
+    <label for="title">Job_title:</label>
+       <input type="text" name="title" id="titleFilter" value="{{ selected_title }}" placeholder="enter a Job_title">
+      <label for="location">Location:</label>
+       <input type="text" name="location" id="locationFilter" value="{{ selected_location }}" placeholder="enter a location">
+        <label for="jobTypeFilter">Job Type:</label>
+        <select name="job_type" id="jobTypeFilter">
+            <option value="">All</option>
+            <option value="Full-time" {% if selected_job_type == 'Full-time' %}selected{% endif %}>Full Time</option>
+            <option value="Part-time" {% if selected_job_type == 'Part-time' %}selected{% endif %}>Part Time</option>
+            <option value="Contract" {% if selected_job_type == 'Contract' %}selected{% endif %}>Contract</option>
+            <option value="Internship" {% if selected_job_type == 'Internship' %}selected{% endif %}>Internship</option>
+          </select>
+        <button type="submit" class="btn-primary">Search</button>
+    </form>
+   </div>  
+   </div>
+   
+  </nav>
+  
+  
+
+
+ <!-- start slide -->
+        <div class="row">
+            <div class="col">
+                <div class="bg-white p-4">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active position-relative">
+                            <img src="https://t3.ftcdn.net/jpg/02/10/87/80/360_F_210878007_vIRqeFVZAeODdJ4dAbw4J8O6kLKzxUfi.jpg" class="d-block w-100" alt="..." style="height:500px;">
+                            <div class="carousel-caption d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 bg-white opacity-75">
+                              <div style="color: black;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: xx-large;">
+                                <h3>Looking for a Job?</h3>
+                                 <p>Search for the job and find your dream job today!</p> 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="carousel-item position-relative">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa_92c8w4ufovj4d0wXg9XopLNbMKOwG8Gimye6ZZf1A&s" class="d-block w-100" alt="..." style="height:500px;">
+                            <div class="carousel-caption d-flex justify-content-center align-items-center position-absolute top-0 start-0 w-100 h-100 bg-white opacity-75">
+                              <div style="color: black;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: xx-large;">
+                                
+                                <h3>Find Your Dream Job</h3>
+                                  <p>Explore exciting career opportunities tailored just for you!</p>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                </div>
+            </div>
+        </div>
+           <!-- end slide -->
+
+  
+
+ <h3 class="text-center">Job Listings</h3>
+<div class="row">
+    <div class="col-lg-3 bg-body-primary ">
+     
+     {% if recent_listings %}
+     <h2 class="text-center">Recent Job Listings</h2>
+     <ul class="list-group">
+         {% for job in recent_listings %}
+             <li class="list-group-item">{{ job.title }}</li>
+         {% endfor %}
+     </ul>
+     {% endif %}
+    </div>
+
+
+    <div class="col-lg-9 bg-body-tertiary">
+        <div class="container-fluid  mt-4  ">
+          {% if job_listings %}
+          <div class="row justify-content-around">
+              {% for job in job_listings %}
+               <div class="col-md-6">
+                  <div class="card job-card mb-3">
+                      <div class="row g-0">
+                          <div class="col-md-4">
+                              <img src="{{ job.logo_image.url }}" class="img-fluid rounded-start" alt="{{ job.title }}" style="margin-top:50px;">
+                          </div>
+                          <div class="col-md-8">
+                              <div class="card-body">
+                                  <h5 class="card-title">{{ job.title }}</h5>
+                                  <p class="card-text"><strong>Salary:</strong>{{ job.salary }}</p>
+                                  <p class="card-text"><strong>Company:</strong> {{ job.company_name }}</p>
+                                  <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
+                                  <p class="card-text"><strong>job_type:</strong> {{ job.job_type }}</p>
+                                  <p class="card-text"><small class="text-muted">{{ job.timestamp }}</small></p>
+                                  <a href="{% url 'view_job' job.id %}" class="btn btn-primary">View Details</a>
+                                  <form action="{% url 'save_application' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="job_id" value="{{job.id}}">
+                                    <button type="submit"class="btn btn-outline-success" style="width:23%; height: 15%; margin-left:230px;">save <i class="bi bi-save2"></i></button>
+                                </form>
+                        
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              {% endfor %}
+          </div>
+          {% else %}
+          <p>No job listings found.</p>
+          {% endif %}
+      </div>
+    </div>
+</div>
+
+
+ {% endblock content1 %}
+

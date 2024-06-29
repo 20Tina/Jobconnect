@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Job Portal - Post a Job
+{% endblock title %}
+
+{% block content1 %}
+<div class="container my-2"style="background-image: url('{% static 'images/14.jpg' %}');background-size: cover; background-position: center;">
+  <div class="row justify-content-center" >
+    <div class="col-md-6">
+      <div class="card shadow p-5 rounded-5" style="width:750px;">
+      
+        <h1 class="text-center mb-4" style=" background-color:rgb(133, 191, 236);font-family: 'Times New Roman', Times, serif;">Post a Job</h1>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="title" class="form-label"><i class="bi bi-pencil-square"></i>Job Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label"><i class="bi bi-pencil-fill"></i>Job Description</label>
+            <textarea class="form-control" id="company_description" name="company_description" rows="5" required></textarea>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="location" class="form-label"><i class="bi bi-geo-alt"></i>Location</label>
+              <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="col">
+              <label for="salary" class="form-label"><i class="bi bi-currency-dollar"></i>Salary</label>
+              <input type="text" class="form-control" id="salary" name="salary">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label"><i class="bi bi-option"></i>Category</label>
+            <select class="form-select" id="category" name="category" required>
+              <option value="" disabled selected>Select Category</option>
+              <option value="1">Software Development</option>
+              <option value="2">Angular developer</option>
+              <option value="3">Software Engineer</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="job_type" class="form-label">Job Type</label>
+            <select class="form-select" id="job_type" name="job_type" required>
+              <option value="" disabled selected>Select Job Type</option>
+              <option value="Full-time">Full Time</option>
+              <option value="Part-time">Part Time</option>
+              <option value="Contract">Contract</option>
+              <option value="Internship">Internship</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="company_name" class="form-label"><i class="bi bi-buildings"></i>Company Name</label>
+            <input type="text" class="form-control" id="company_name" name="company_name" required>
+          </div>
+          <div class="mb-3">
+            <label for="logo_image" class="form-label">Company Logo</label>
+            <input type="file" class="form-control" id="logo_image" name="logo_image" accept="image/*">
+          </div>
+          <div class="mb-3">
+    <label for="url" class="form-label"><i class="bi bi-link"></i>URL</label>
+    <input type="url" class="form-control" id="url" name="url" required>
+  </div>
+          <div class="mb-3">
+            <label for="requirement" class="form-label"><i class="bi bi-journal-check"></i>Requirement</label>
+            <input type="text" class="form-control" id="Requirement" name="requirements">
+          </div>
+          <div class="mb-3">
+    <label for="Special instructions" class="form-label"><i class="bi bi-journal-check"></i>Special Instructions</label>
+    <input type="text" class="form-control" id="special_instructions" name="special_instructions">
+</div>
+          <div class="mb-3">
+            <label for="last_date" class="form-label"><i class="bi bi-calendar-event-fill"></i>Last Date</label>
+            <input type="date" class="form-control" id="last_date" name="last_date">
+          </div>
+          <button type="submit" class="btn btn-primary">Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content1 %}

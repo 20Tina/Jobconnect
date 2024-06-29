@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+ job portal job-applied
+{% endblock title %}
+{% block content1 %}
+
+<div class="container-fluid">
+  <div class="row">
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+    <h3 class="text-center">Applied jobs</h3>
+    <table id="application_jobs">
+      <thead>
+        <tr>
+          <th scope="col">Sr.no</th>
+          <th scope="col">Job Title</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Cover Letter</th>
+          <th scope="col">Resume</th>
+          <th scope="col">Applied Date</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for applied in applied_jobs %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ applied.job.title }}</td>
+          <td>{{ applied.name }}</td>
+          <td>{{ applied.email }}</td>
+          <td>{{ applied.phone_number }}</td>
+          <td>{{ applied.cover_letter }}</td>
+          <td>
+  {% if applied.resume %}
+  <a href="{{ applied.resume.url }}" target="_blank">View Resume</a>
+  {% else %}
+  No resume available
+  {% endif %}
+</td>
+          <td>{{ applied.applied_date }}</td>
+          <td class="btn-container">
+            <a href="{% url 'view_job' applied.job.id %}">
+              <button class="btn btn-warning btn-sm">View</button>
+            </a>
+          </td>
+          <td class="btn-container">
+            <a href="{% url 'del_job_applied' applied.id %}">
+              <button class="btn btn-danger btn-sm">Delete</button>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content1 %}%

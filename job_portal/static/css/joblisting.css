@@ -1,0 +1,80 @@
+.job-type-filter-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.job-type-filter-form label {
+    margin-right: 10px;
+    font-weight:700;
+}   
+
+.job-type-filter-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    
+}
+.job-type-filter-form input[type='text']
+{
+    
+   
+    border: 1px solid #ecbd59;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border-radius:5px;
+    padding: 6px;
+    margin-top: 5px;
+    
+    
+
+}
+.job-type-filter-form button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #dbb911f6;
+    color: #fff;
+    cursor: pointer;
+}
+
+.job-type-filter-form button:hover {
+    background-color: #acbfd4;
+
+}
+.job-type-filter-form select option {
+    border-color: #e6ab3e;
+}
+.job-type-filter-form select {
+    padding: 6px; /* Increase padding */
+    border: 1px solid #ecbd59; /* Add border */
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+
+
+.job-card .card-body {
+    padding:25px; 
+}
+
+
+
+.job-card .card-text {
+    margin-bottom: 5px; 
+}
+
+.job-card .btn-primary {
+    border-radius: 20px; 
+}
+
+
+
+.navbar-search  {
+    margin-right: 20px; 
+    font-weight: bold;
+}
+
+

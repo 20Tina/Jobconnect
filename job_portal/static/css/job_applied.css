@@ -1,0 +1,16 @@
+#application_jobs th {
+  text-align: left;
+  background-color: rgb(128, 128, 128);
+  color: white;
+}
+#application_jobs th,
+td {
+  text-align: left;
+  padding: 8px; 
+}
+#application_jobs tr:hover {
+  background-color: rgb(241, 231, 172);
+}
+.btn-container {
+  white-space: nowrap;
+}

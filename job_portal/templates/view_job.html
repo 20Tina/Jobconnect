@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}
+  job portal
+{% endblock title %}
+{% block content1 %}
+ <div class="container-fluid" style="width:1200px;"><!--container-->
+        <div class="myclass shadow-lg p-3 mb-5 bg-body-tertiary rounded">  <!--box -->
+        <h2 class="text-center">Job Details</h2>
+        {% if already_applied %}
+        <div class="container">
+            <div class="alert alert-success" role="alert">
+                You have already applied for this job.
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="col text-center">
+            <img src={{job.logo_image.url}} class="img-fluid rounded-circle" alt="" width="200" height="400">
+            <h2>{{job.title}}</h2>
+        </div>
+    
+        
+    <div class="row justify-content-center p-0">
+          <div class="col text-center">
+           <h3 style="font-size:x-large;"><span class="material-icons">category</span>{{job.category}}</h3>
+         </div>
+          <div class="col text-center">
+             <h3 style="font-size:x-large;"><span class="material-icons">location_on</span>{{job.location}}</h3>
+          </div>
+          <div class="col text-center">
+            <h3 style="font-size:x-large;"><span class="material-icons">access_time</span>{{job.job_type}}</h3>
+          </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col md-9">
+       <h4>Job Description</h4>
+      <p>{{job.company_description}}</p>
+      </div>
+        <div class="col md-3">
+        <div class="summary-box">
+            <h4>Summary</h4>
+            <p>Published on:{{job.timestamp}}</p>
+            <p>Job type:{{job.job_type}}</p>
+            <p>Job location:{{job.location}}</p>
+            <p>Salary:{{job.salary}}</p>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="row">
+        <h4>Job requirements</h4>
+        <p>{{job.requirements}}</p>
+    </div>
+        
+    <div class="row">
+        <h4>Special Instructions</h4>
+        <p>{{job.special_instructions}}</p>
+    </div>
+
+     <div class="row">
+       <h4> URL </h4>
+        <a href="{{ job.url }}">{{ job.url }}</a>
+    </div>
+
+    <div class="row">
+       <h4> Application Deadline</h4>
+       <p>{{job.last_date}}</p>
+    </div>
+       
+    <div class="row">
+      <div class="col">
+      {% if already_applied %}
+         {{empty}}
+      {% else %}
+        <button id="showApplicationForm" class="btn btn-primary">Apply Now</button>
+      {% endif %}
+          
+        </div>
+  </div>
+  <br>{{message}}
+  {% comment %} <form action="{% url 'save_application' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="job_id" value="{{job.id}}">
+    <button type="submit"class="btn btn-outline-success" style="width:23%; height: 15%;">save <i class="bi bi-save2"></i></button>
+</form>
+   {% endcomment %}
+ 
+
+  
+  <!-- Modal -->
+  <div class="modal" id="applicationModal">  
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h5 class="modal-title">Application Form</h5>
+          </div>
+        
+          <!-- Modal Body -->
+          <div class="modal-body">
+              <form id="applicationForm" action="{% url 'job_applied' %}" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                   <input type="hidden" id="job_id" name="job_id" value="{{ job.id }}">
+                  <label for="job_title">Job Title:</label>
+                  <input type="text" id="job_title" name="job_title" value="{{ job.title }}" required style="width: 30%;"><br><br>
+  
+                  <label for="name">Your Name:</label>
+                  <input type="text" id="name" name="name" value="{{ full_name }}" required><br><br>
+  
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" value="{{ email }}" placeholder="Enter your email" required><br><br>
+
+                  <label for="phone_number">Phone Number:</label>
+                  <input type="tel" id="phone_number" value="{{ user_profile.phone_number }}" name="phone_number" minlength="10" maxlength="10" required> <br>
+       
+  
+                  <label for="cover_letter">Cover Letter:</label><br>
+                  <textarea id="cover_letter" name="cover_letter" rows="4" required></textarea><br><br>
+  
+                  <label for="resume">Resume/CV:</label>
+                  <input type="file" id="resume" name="resume" required><br><br>
+              </form>
+          </div>
+        
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+              <a href="{% url 'job_applied' %}"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></a>
+              <button type="submit" form="applicationForm" class="btn btn-primary">Submit Application</button>
+          </div>
+      </div>
+  </div>
+  
+  
+  <script>
+      document.getElementById("showApplicationForm").addEventListener("click", function() {
+          document.getElementById("applicationModal").style.display = "block";
+      });
+  </script>
+  
+    
+    </div>
+
+
+</div><!--end box-->
+</div><!--2 row-->
+</div><!--end container-->
+{% endblock content1 %}
